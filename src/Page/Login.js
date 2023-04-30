@@ -2,8 +2,10 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import Loader from "../Component/Loader";
 export default function Login(){
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const [enterData, setEnterData] = useState({
         email : '',
@@ -14,6 +16,7 @@ export default function Login(){
     const [displayErrorShow, setDisplayErrorShow] = useState('none');
 
     const handleSubmission = (event) => {
+        setLoading(true)
         event.preventDefault();
         if(!enterData.email || !enterData.password){
             setErrorMsg('Fill all fiels');
@@ -33,7 +36,9 @@ export default function Login(){
 
     }
     return(
+        (loading) ? <Loader /> :
         <div className="bg-blue-400 w-[500px] h-[400px] p-4 d-flex">
+            
             <h3 className="text-center text-4xl">Login</h3>
             <div className="w-[80%] m-[auto] mt-[40px]">
                 <form>

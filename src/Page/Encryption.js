@@ -51,9 +51,10 @@ return (
             value="Submit"
             onClick={handleSubmit}
         />
-        <div className="bg-white min-h-[45px] m-2 p-2 my-6">
-            <h3>ciphertext: {encrypted}</h3>
-        </div>
+        {encrypted &&
+        <div className="bg-white min-h-[45px] m-2 p-2 my-6 break-words">
+            <h3>{encrypted}</h3>
+        </div>}
     </div>
 )
 }
