@@ -82,7 +82,10 @@ const Home = () => {
                     </ol>
                 </div>
 
-                <div className="bg-blue-400 w-[280px] h-[220px] p-4 m-4">
+                <div 
+                    className="bg-blue-400 w-[280px] h-[220px] p-4 m-4"
+                    onClick={() => navigate('/pass-strength-checker')}
+                >
                     <h3 className="text-3xl font-bold text-white text-center">Password Strength Checker</h3>
                     <ol>
                         <li>Text</li>

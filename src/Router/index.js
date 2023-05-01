@@ -9,7 +9,8 @@ import {
         Welcome, 
         Decryption, 
         PassGenerator, 
-        PassManager
+        PassManager,
+        PassStrengthChecker
       } from '../Page' 
 const App = () =>{
   return (
@@ -24,6 +25,8 @@ const App = () =>{
         <Route path="/decryption" element={<Decryption />} />
         <Route path="/password-generator" element={<PassGenerator />} />
         <Route path="/password-manager" element={<PassManager />} />
+        <Route path="/pass-strength-checker" element={<PassStrengthChecker />} />
+
 
 
 
