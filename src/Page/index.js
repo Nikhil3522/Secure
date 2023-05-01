@@ -5,5 +5,15 @@ import Signup from './Signup';
 import Welcome from './Welcome';
 import Decryption from './Decryption';
 import PassGenerator from './PassGenerator.js';
+import PassManager from './PassManager';
 
-export {Home, Encryption, Login, Signup, Welcome, Decryption, PassGenerator};
+export {
+    Home, 
+    Encryption, 
+    Login, 
+    Signup, 
+    Welcome, 
+    Decryption, 
+    PassGenerator, 
+    PassManager
+};
