@@ -3,7 +3,7 @@ import { usePosts } from "../firebase";
 import CryptoJS from 'crypto-js';
 
 const Decryption = () =>{
-    const posts = usePosts();
+    const posts = usePosts('Encrypt');
     const [cipherText, setCipherText] = useState(null);
     const [secretKey, setScretKey] = useState(null);
     const [decryptedText, setDecryptedText] = useState(null);

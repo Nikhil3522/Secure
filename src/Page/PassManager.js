@@ -1,9 +1,10 @@
-import {useState} from "react";
-import { app, auth } from '../firebase';
+import {useEffect, useState} from "react";
+import { app, auth, usePosts } from '../firebase';
 import { getDatabase, push, ref } from 'firebase/database';
-
+import ShowPassword from "../Component/ShowPassword";
 
 const PassManager = () => {
+    const DBData = usePosts('Password');
     const db = getDatabase(app);
     const [title, setTitle] = useState(null);
     const [URL, setURL] = useState(null);
@@ -63,6 +64,15 @@ const PassManager = () => {
             <div className="bg-white min-h-[45px] m-2 p-2 my-6 break-words">
                 <h3>{encrypted}</h3>
             </div>} */}
+            {DBData.map((item, index) => (
+                <ShowPassword item={item} key={index}/>
+                // <div className="mt-4 bg-blue-300 p-4">
+                //     <h1 className="font-bold text-2xl">{item.title}</h1>
+                //     <h1>URL: {item.URL}</h1>
+                //     <h1>UserName: {item.Username}</h1>
+                //     <h1>Password: {item.password}</h1>
+                // </div>
+            ))}
         </div>
     )
 }
