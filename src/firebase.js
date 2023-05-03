@@ -17,11 +17,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-function usePosts() {
+function usePosts(collectionName) {
     const [posts, setPosts] = useState([]);
   
     useEffect(() => {
-      const postsRef = ref(getDatabase(), 'Encrypt');
+      const postsRef = ref(getDatabase(), collectionName);
       onValue(postsRef, (snapshot) => {
         const postsData = snapshot.val();
         const postsList = Object.keys(postsData).map((key) => {

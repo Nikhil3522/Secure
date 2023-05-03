@@ -54,6 +54,9 @@ const PassManager = () => {
 
     return (
         <div className="p-4 w-[500px] flex flex-col m-[auto]">
+            <h1 className='text-center my-6 text-4xl text-white'>
+                Passsword Manager
+            </h1>
             <input 
                 className="m-2 h-[45px] px-2"
                 type="text"

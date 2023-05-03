@@ -14,7 +14,7 @@ const History = () => {
             </h1>
             {
                 DBData.map((item, index) =>(
-                    <div key={index} className='mt-4 bg-[#FFFFFF] bg-opacity-35 rounded-xl w-[700px] m-[auto] p-4 text-white'>
+                    <div key={index} className='mt-4 bg-[#FFFFFF] bg-opacity-35 rounded-xl w-[700px] m-[auto] p-4'>
                         <h3>{item.message}</h3>
                         <p className='text-[13px] flex flex-row-reverse'>{item.date}</p>
                     </div>
