@@ -89,7 +89,10 @@ const Home = () => {
                     <h3 className="text-3xl font-bold text-white text-center">Documents Manager</h3>
                 </div>
 
-                <div className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay">
+                <div 
+                    className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
+                    onClick={() => navigate('/history')}
+                >
                     <h3 className="text-3xl font-bold text-white text-center">History</h3>
                 </div>
 

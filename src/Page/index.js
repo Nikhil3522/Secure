@@ -7,6 +7,7 @@ import Decryption from './Decryption';
 import PassGenerator from './PassGenerator.js';
 import PassManager from './PassManager';
 import PassStrengthChecker from './PassStrengthChecker';
+import History from './History';
 
 export {
     Home, 
@@ -17,5 +18,6 @@ export {
     Decryption, 
     PassGenerator, 
     PassManager,
-    PassStrengthChecker
+    PassStrengthChecker,
+    History
 };

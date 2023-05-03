@@ -12,7 +12,8 @@ import {
         Decryption, 
         PassGenerator, 
         PassManager,
-        PassStrengthChecker
+        PassStrengthChecker,
+        History
       } from '../Page' 
 const App = () =>{
   return (
@@ -62,6 +63,13 @@ const App = () =>{
           element={
             <PrivateRoute>
               <PassStrengthChecker />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/history" 
+          element={
+            <PrivateRoute>
+              <History />
             </PrivateRoute>
           } 
         />
