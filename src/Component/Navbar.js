@@ -24,7 +24,7 @@ const Navbar = () => {
                 </div>
                 <div 
                     className="rounded-lg text-white font-bold w-[100px] mx-4 text-center cursor-pointer"
-                    onClick={() => deleteCookie('userEmail')}
+                    onClick={() => deleteCookie('userId')}
                 >
                     Logout
                 </div>

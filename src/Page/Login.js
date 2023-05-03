@@ -28,9 +28,10 @@ export default function Login(){
         setDisplayErrorShow('none');
 
         signInWithEmailAndPassword(auth, enterData.email, enterData.password)
-            .then(async (res) => {
-                console.log('logged in');
-                Cookies.set('userEmail', enterData.email);
+            .then(async (userCredential) => {
+                const user = userCredential.user;
+                const uid = user.uid;
+                Cookies.set('userId', uid);
                 navigate('/home');
             })
             .catch((err) => {

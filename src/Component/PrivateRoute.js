@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 const PrivateRoute = ({ children}) => {
     console.log("child", children)
-    const userId = Cookies.get('userEmail');
+    const userId = Cookies.get('userId');
   if (userId == undefined) {
     return <Navigate to='/login' />;
   }
