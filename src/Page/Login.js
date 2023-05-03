@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import Loader from "../Component/Loader";
+import Cookies from 'js-cookie';
+
 export default function Login(){
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -28,6 +30,7 @@ export default function Login(){
         signInWithEmailAndPassword(auth, enterData.email, enterData.password)
             .then(async (res) => {
                 console.log('logged in');
+                Cookies.set('userEmail', enterData.email);
                 navigate('/home');
             })
             .catch((err) => {
