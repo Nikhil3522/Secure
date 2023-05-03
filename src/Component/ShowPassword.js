@@ -10,9 +10,9 @@ const ShowPassword = (props) => {
     //     }
     // }, [])
     return (
-        <div className="mt-4 bg-blue-300 p-4">
+        <div className="mt-4 bg-[#FFFFFF] bg-opacity-35 rounded-xl p-4">
             <h1 className="font-bold text-2xl">{props.item.title}</h1>
-            <h1>URL: {props.item.URL}</h1>
+            <h1>URL: <a href={props.item.URL}>{props.item.URL}</a> </h1>
             <h1>UserName: {props.item.Username}</h1>
             <div className="flex">
                 <h1>

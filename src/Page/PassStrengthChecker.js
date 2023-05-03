@@ -40,7 +40,7 @@ const PassStrengthChecker = () => {
     }
 
     return (
-        <div className="bg-blue-400 p-4 w-[500px] flex flex-col">
+        <div className="p-4 w-[500px] flex flex-col m-[auto]">
             <input 
                 className="m-2 h-[45px] px-2"
                 type="text"

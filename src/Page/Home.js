@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <div className="flex flex-col">
             <div className="flex m-[auto] w-[800px] ">
-                <h1 className="text-4xl  mt-[160px] min-w-[400px]">
+                <h1 className="text-4xl text-white min-h-[200px]  mt-[160px] min-w-[400px]">
                     <Typewriter
                         words={['Secure your digital world with our encryption solutions',
                                 'Protect your data, secure your privacy',
@@ -47,28 +47,28 @@ const Home = () => {
             </div>
             <div className="flex flex-wrap m-[auto] justify-center">
                 <div 
-                    className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4"
+                    className=" cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
                     onClick={() => navigate('/encryption')}
                 >
-                    <h3 className="text-3xl font-bold text-white text-center">Encryption</h3>
+                    <h3 className="text-3xl font-bold text-white text-center overlay__title">Encryption</h3>
                 </div>
 
                 <div 
-                    className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4"
+                    className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
                     onClick={() => navigate('/decryption')}
                 >
                     <h3 className="text-3xl font-bold text-white text-center">decryption</h3>
                 </div>
 
                 <div 
-                    className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4"
+                    className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
                     onClick={() => navigate('/password-generator')}
                 >
                     <h3 className="text-3xl font-bold text-white text-center">Password Generator</h3>
                 </div>
 
                 <div 
-                    className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4"
+                    className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
                     onClick={() => navigate('/pass-strength-checker')}
                 >
                     <h3 className="text-3xl font-bold text-white text-center">Password Strength Checker</h3>
@@ -76,20 +76,20 @@ const Home = () => {
 
                 <div 
                     onClick={() => navigate('/password-manager')}
-                    className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4"
+                    className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay"
                 >
                     <h3 className="text-3xl font-bold text-white text-center">Password Manager</h3>
                 </div>
 
-                <div className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4">
+                <div className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay">
                     <h3 className="text-3xl font-bold text-white text-center">Access request</h3>
                 </div>
 
-                <div className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4">
+                <div className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay">
                     <h3 className="text-3xl font-bold text-white text-center">Documents Manager</h3>
                 </div>
 
-                <div className="bg-blue-400 cursor-pointer w-[280px] h-[220px] p-4 m-4">
+                <div className="cursor-pointer w-[280px] h-[220px] p-4 m-4 overlay">
                     <h3 className="text-3xl font-bold text-white text-center">History</h3>
                 </div>
 

@@ -47,7 +47,7 @@ export default function Signup(){
             ))
     }
     return(
-        <div className="bg-blue-400 w-[500px]  p-4 d-flex">
+        <div className=" w-[500px]  p-4 d-flex m-[auto]">
             <h6 className="text-center text-4xl">Create account</h6>
             <div className="w-[80%] m-[auto] mt-[40px]">
                 <form>

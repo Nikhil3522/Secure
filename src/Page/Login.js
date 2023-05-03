@@ -40,7 +40,7 @@ export default function Login(){
     }
     return(
         (loading) ? <Loader /> :
-        <div className="bg-blue-400 w-[500px] h-[400px] p-4 d-flex">
+        <div className=" w-[500px] h-[400px] p-4 d-flex m-[auto]">
             
             <h3 className="text-center text-4xl">Login</h3>
             <div className="w-[80%] m-[auto] mt-[40px]">
