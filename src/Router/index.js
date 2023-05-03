@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../Component/PrivateRoute';
+import Navbar from '../Component/Navbar';
 import {
         Home, 
         Encryption, 
@@ -17,6 +18,7 @@ const App = () =>{
   return (
     <BrowserRouter>
       {/* <Header /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
