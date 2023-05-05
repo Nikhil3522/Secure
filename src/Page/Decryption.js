@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePosts } from "../firebase";
 import CryptoJS from 'crypto-js';
+import DecryptResult from "../Component/DecryptResult";
 
 const Decryption = () =>{
     const posts = usePosts('Encrypt');
@@ -48,8 +49,28 @@ const Decryption = () =>{
             onClick={handleSubmit}
         />
         {decryptedText &&
-        <div className="bg-white min-h-[45px] m-2 p-2 my-6">
-            <h3>{decryptedText}</h3>
+        <div className="bg-white min-h-[85px] m-2 p-2 my-6">
+            <DecryptResult url={decryptedText}/>
+            {/* {(decryptedText.includes(".jpg")) ?
+             <h3>URLImage :- {decryptedText}</h3>
+                // <img src={decryptedText} /> :
+                :
+            (decryptedText.includes(".pdf") || decryptedText.includes(".png") || decryptedText.includes(".gif")) != null ?
+            <div>
+                <h3>URLImage :- {decryptedText}</h3>
+                <object data={decryptedText} type="application/pdf" width="100%" height="100%">
+                    <p>Alternative text - include a link <a href={decryptedText}>to the PDF!</a></p>
+                </object> 
+            </div>
+            
+            :
+                <h3>URL :- {decryptedText}</h3>
+            } */}
+            {/* {decryptedText.match(/\.(pdf)$/) != null && */}
+            {/* <object data={decryptedText} type="application/pdf" width="100%" height="100%">
+                <p>Alternative text - include a link <a href="http://africau.edu/images/default/sample.pdf">to the PDF!</a></p>
+            </object> */}
+            
         </div>}
     </div>
     )
