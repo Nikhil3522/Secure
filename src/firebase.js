@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {getAuth} from 'firebase/auth';
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -34,7 +35,10 @@ function usePosts(collectionName) {
     return posts;
 }
 
-export{ app, auth, usePosts};
+// Firebase storage reference
+const storage = getStorage(app);
+
+export{ app, auth, usePosts, storage};
 
 
 
