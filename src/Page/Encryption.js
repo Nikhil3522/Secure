@@ -106,19 +106,19 @@ return (
         </h1>
         <div className="flex justify-between bg-pink-200 mb-8 px-8 py-2 rounded-xl text-white font-bold">
             <div 
-                className="cursor-pointer hover:font-extrabold"
+                className={`${encryptType === 1 && 'text-blue-500'} cursor-pointer hover:font-extrabold `}
                 onClick={() => setEncryptType(1)}
             >
                 TEXT
             </div>
             <div 
-                className="cursor-pointer hover:font-extrabold"
+                className={`${encryptType === 2 && 'text-blue-500'} cursor-pointer hover:font-extrabold`}
                 onClick={() => setEncryptType(2)}
             >
                 IMAGE
             </div>
             <div 
-                className="cursor-pointer hover:font-extrabold"
+                className={`${encryptType === 3 && 'text-blue-500'} cursor-pointer hover:font-extrabold`}
                 onClick={() => setEncryptType(3)}
             >
                 FILE
