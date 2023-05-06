@@ -5,6 +5,8 @@ import { getDatabase, push, ref, set } from 'firebase/database';
 import Cookies from "js-cookie";
 import {storage} from "../firebase"
 import { ref as sRef, uploadBytesResumable, getDownloadURL  } from 'firebase/storage';
+import gallery from '../assest/gallery-icon.png';
+import loadingBtn from '../assest/1484.gif';
 
 
 const Encryption = () => {
@@ -13,6 +15,8 @@ const Encryption = () => {
     const [text, setText] = useState(null);
     const [encrypted, setEncrypted] = useState(null);
     const [encryptType, setEncryptType] = useState(2);
+    const [imgSrc, setImgSrc] = useState('');
+    const [loading, setLoading] = useState(false);
     const db = getDatabase(app);
 
     const getTodayDateTime = () => {
@@ -27,6 +31,7 @@ const Encryption = () => {
     };
 
     const handleUpload = async () => {
+        setLoading(true);
         if(!text || !secretKey){
             alert("Please fill text and secretkey")
             return;
@@ -97,13 +102,26 @@ const Encryption = () => {
           .catch((error) => {
             console.error('Error writing data:', error);
           });
+          setLoading(false);
     }
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+          setImgSrc(reader.result);
+        };
+    
+        reader.readAsDataURL(file);
+      };
 
 return (
     <div className="p-4 w-[500px] flex flex-col m-[auto]">
         <h1 className='text-center my-6 text-4xl text-white'>
             Encryption
         </h1>
+        
         <div className="flex justify-between bg-pink-200 mb-8 px-8 py-2 rounded-xl text-white font-bold">
             <div 
                 className={`${encryptType === 1 && 'text-blue-500'} cursor-pointer hover:font-extrabold `}
@@ -124,6 +142,9 @@ return (
                 FILE
             </div>
         </div>
+        {encryptType === 2 &&
+            <img className="m-[auto]" src={`${imgSrc ? imgSrc : gallery}`} width="200px"/>
+        }
         {
             encryptType == 1 ?
             // Text
@@ -141,7 +162,10 @@ return (
                     type="file"
                     accept="image/*"
                     placeholder="Message"
-                    onChange={(e) =>setText(e.target.files[0])}
+                    onChange={(e) =>{
+                        handleImageChange(e)
+                        setText(e.target.files[0])}
+                    }
                 />
             :
             // File
@@ -160,12 +184,16 @@ return (
             placeholder="Key"
             onChange={(e) => setScretKey(e.target.value)}
         />
-        <input 
-            className="bg-green-400 hover:bg-green-500 p-2 rounded-lg cursor-pointer text-white w-[100px] m-[auto]"
+        <button
+            className="bg-green-400 hover:bg-green-500 p-2 rounded-lg cursor-pointer text-white w-[100px] max-h-[40px] m-[auto]"
             type="submit"
             value="Submit"
             onClick={encryptType == 1 ? handleSubmit : encryptType ==2 ? handleUpload: handleUpload}
-        />
+        >
+            {loading ?
+                <img className="mt-[-20px] ml-2" src={loadingBtn} alt="loading indicator" />
+            : 'Submit'}
+        </button>
         {encrypted &&
         <div className="bg-white min-h-[45px] m-2 p-2 my-6 break-words">
             <h3>{encrypted}</h3>
