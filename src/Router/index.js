@@ -13,7 +13,8 @@ import {
         PassGenerator, 
         PassManager,
         PassStrengthChecker,
-        History
+        History,
+        DocManager
       } from '../Page' 
 const App = () =>{
   return (
@@ -70,6 +71,13 @@ const App = () =>{
           element={
             <PrivateRoute>
               <History />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/document-manager" 
+          element={
+            <PrivateRoute>
+              <DocManager />
             </PrivateRoute>
           } 
         />

@@ -8,6 +8,7 @@ import PassGenerator from './PassGenerator.js';
 import PassManager from './PassManager';
 import PassStrengthChecker from './PassStrengthChecker';
 import History from './History';
+import DocManager from './DocManager';
 
 export {
     Home, 
@@ -19,5 +20,6 @@ export {
     PassGenerator, 
     PassManager,
     PassStrengthChecker,
-    History
+    History,
+    DocManager
 };
