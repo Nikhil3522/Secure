@@ -6,9 +6,12 @@ import { getDatabase, push, ref, set } from 'firebase/database';
 import Cookies from "js-cookie";
 import {storage} from "../firebase"
 import { ref as sRef, uploadBytesResumable, getDownloadURL  } from 'firebase/storage';
+import { usePosts } from "../firebase";
+import ShowDocument from "../Component/ShowDocument";
 
 const DocManager = () => {
     const userId = Cookies.get('userId');
+    const DBData = usePosts(`Documents/${userId}`);
     const [optionType, setOptionType] = useState(1);
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState("title value");
@@ -16,6 +19,7 @@ const DocManager = () => {
     const [pass, setPassword] = useState(null);
     const [file, setFile] = useState(null);
     const [encrypted, setEncrypted] = useState(null);
+    const [secureDoc, setSecureDoc] = useState(null);
     const db = getDatabase(app);
 
     const getTodayDateTime = () => {
@@ -36,11 +40,9 @@ const DocManager = () => {
             return;
         }
 
-        var storageRef;
+        const storageRef = sRef(storage, `/image/${file.name}`);
 
-        storageRef = sRef(storage, `/documents/${file.name}`);
-            
-        const uploadTask = uploadBytesResumable(storageRef, title);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
         await uploadTask.on(
             "state_changed",
@@ -69,32 +71,36 @@ const DocManager = () => {
         if(title != null && file != null){
             var ciphertext;
 
-        console.log("NURL", url);
-        ciphertext = CryptoJS.AES.encrypt(url, pass).toString();
-        console.log("CURL", ciphertext);
+            console.log("NURL", url);
+            if(secureDoc == true){
+                ciphertext = CryptoJS.AES.encrypt(url, pass).toString();
+            }else{
+                ciphertext = url;
+            }
+            console.log("CURL", ciphertext);
 
-        setEncrypted(ciphertext);
+            setEncrypted(ciphertext);
 
-        const data = {
-            title: title,
-            desciption: desc,
-            fileEncrpted: ciphertext,
-            secretKey: pass,
-        }
+            const data = {
+                title: title,
+                desciption: desc,
+                fileEncrpted: ciphertext,
+                secretKey: pass,
+            }
 
-        const postsRef = ref(db, `Documents/${userId}`);
-        push(postsRef, data)
-        .then(() => {
-            const historyRef = ref(db, `History/${userId}`);
-            push(historyRef, {
-                message: `You Encrypted "${title}" to ${ciphertext} the secret key is ${pass}.`,
-                date: getTodayDateTime()
+            const postsRef = ref(db, `Documents/${userId}`);
+            push(postsRef, data)
+            .then(() => {
+                const historyRef = ref(db, `History/${userId}`);
+                push(historyRef, {
+                    message: `You Encrypted "${title}" to ${ciphertext} the secret key is ${pass}.`,
+                    date: getTodayDateTime()
+                });
+            })
+            .catch((error) => {
+                console.error('Error writing data:', error);
             });
-          })
-          .catch((error) => {
-            console.error('Error writing data:', error);
-          });
-          setLoading(false);
+            setLoading(false);
         }else{
             if(title == null){
                 alert("Please Enter the title")
@@ -126,46 +132,89 @@ const DocManager = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col">
-                <input 
-                    className="m-2 h-[45px] px-2 w-[97%]"
-                    type="text"
-                    placeholder="Title"
-                    onChange={(e) => {setTitle(e.target.value)}}
-                />
-                <input 
-                    className="m-2 h-[45px] px-2 w-[97%]"
-                    type="text"
-                    placeholder="Description"
-                    onChange={(e) => {setDesc(e.target.value)}}
-                />
-                <input 
-                    className="m-2 h-[45px] px-2 w-[97%]"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => {setPassword(e.target.value)}}
-                />
-                <input 
-                    className="m-2 h-[45px] px-2 w-[97%]"
+            {optionType === 1 &&
+                <div className="flex flex-col">
+                    <input 
+                        className="m-2 h-[45px] px-2 w-[97%]"
+                        type="text"
+                        placeholder="Title"
+                        onChange={(e) => {setTitle(e.target.value)}}
+                    />
+                    <input 
+                        className="m-2 h-[45px] px-2 w-[97%]"
+                        type="text"
+                        placeholder="Description"
+                        onChange={(e) => {setDesc(e.target.value)}}
+                    />
+                    {secureDoc == null &&
+                    <>
+                    <p>Do you want to secure your document with password?</p>
+                    <label>
+                        <input type="checkbox" 
+                        onClick={() => {
+                            setSecureDoc(true);
+                        }}/>
+                        Yes
+                    </label>
+                    <label>
+                        <input type="checkbox" 
+                        onClick={() => {
+                            setSecureDoc(false);
+                        }}/>
+                        No
+                    </label>
+                    </>}
+
+                    {secureDoc && 
+                        <input 
+                            className="m-2 h-[45px] px-2 w-[97%]"
+                            type="password"
+                            placeholder="Password"
+                            onChange={(e) => {setPassword(e.target.value)}}
+                        />
+                    }
+
+                    {/* <input 
+                        className="m-2 h-[45px] px-2 w-[97%]"
+                        type="file"
+                        accept="application/pdf, application/vnd.ms-excel, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        onChange={(e) =>setFile(e.target.files[0])}
+                    /> */}
+                    <input 
+                    className="m-2 h-[45px] px-2"
                     type="file"
                     accept="application/pdf, application/vnd.ms-excel, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    placeholder="Message"
                     onChange={(e) =>setFile(e.target.files[0])}
                 />
-                <button
-                    className="bg-green-400 hover:bg-green-500 p-2 rounded-lg cursor-pointer text-white w-[100px] max-h-[40px] m-[auto]"
-                    type="submit"
-                    value="Submit"
-                    onClick={() => handleUpload()}
-                >
-                    {loading ?
-                        <img className="mt-[-20px] ml-2" src={loadingBtn} alt="loading indicator" />
-                    : 'Submit'}
-                </button>
-            </div>
-            {encrypted &&
-            <div className="bg-white min-h-[45px] m-2 p-2 my-6 break-words">
-                <h3>{encrypted}</h3>
+                    <button
+                        className="bg-green-400 hover:bg-green-500 p-2 rounded-lg cursor-pointer text-white w-[100px] max-h-[40px] m-[auto]"
+                        type="submit"
+                        value="Submit"
+                        onClick={() => handleUpload()}
+                    >
+                        {loading ?
+                            <img className="mt-[-20px] ml-2" src={loadingBtn} alt="loading indicator" />
+                        : 'Submit'}
+                    </button>
+                    {/* {encrypted &&
+                    <div className="bg-white min-h-[45px] m-2 p-2 my-6 break-words">
+                        <h3>{encrypted}</h3>
+                    </div>} */}
+                </div>
+            }
+
+            {optionType === 2 && 
+            <div>
+                {DBData && DBData.map((item, index) => (
+                    <ShowDocument 
+                        item={item} 
+                        key={index}
+                    />   
+                ))}
             </div>}
+            
+
                 
         </div>
     )
