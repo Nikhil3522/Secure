@@ -9,6 +9,7 @@ import PassManager from './PassManager';
 import PassStrengthChecker from './PassStrengthChecker';
 import History from './History';
 import DocManager from './DocManager';
+import AccessReq from './AccessReq';
 
 export {
     Home, 
@@ -21,5 +22,6 @@ export {
     PassManager,
     PassStrengthChecker,
     History,
-    DocManager
+    DocManager,
+    AccessReq
 };

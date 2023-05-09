@@ -14,7 +14,8 @@ import {
         PassManager,
         PassStrengthChecker,
         History,
-        DocManager
+        DocManager,
+        AccessReq
       } from '../Page' 
 const App = () =>{
   return (
@@ -78,6 +79,13 @@ const App = () =>{
           element={
             <PrivateRoute>
               <DocManager />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/access" 
+          element={
+            <PrivateRoute>
+              <AccessReq />
             </PrivateRoute>
           } 
         />
