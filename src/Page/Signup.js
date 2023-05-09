@@ -1,10 +1,13 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { auth } from '../firebase';
+import { app, auth } from '../firebase';
+import { getDatabase, push, ref, set } from 'firebase/database';
+
 
 export default function Signup(){
     const navigate = useNavigate();
+    const db = getDatabase(app);
     const [userData, setUserData] = useState({
         name: '',
         username: '',
@@ -33,10 +36,19 @@ export default function Signup(){
         setDisplayErrorShow('none');
         createUserWithEmailAndPassword(auth, userData.email, userData.password)
             .then((res) => {
+                const userId = res.user.reloadUserInfo.localId;
                 const user = res.user;
                 updateProfile(user, {
                     displayName: userData.name,
                 })
+                const postsRef = ref(db, `UserInfo/${userId}`);
+                set(postsRef, userData)
+                .then(() => {
+                    console.log("User information saved!")
+                })
+                .catch((error) => {
+                    console.error('Error writing data:', error);
+                });
                 navigate('/login')
                 // console.log(user);
             })
